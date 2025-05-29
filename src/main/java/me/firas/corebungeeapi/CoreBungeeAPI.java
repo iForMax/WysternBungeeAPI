@@ -18,8 +18,4 @@ public final class CoreBungeeAPI extends Plugin {
         System.out.println("Core Bungee API successfully enabled!");
     }
 
-    @Override
-    public void onDisable() {
-
-    }
 }
