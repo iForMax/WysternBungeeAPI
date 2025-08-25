@@ -13,12 +13,17 @@ import java.util.UUID;
 public final class GuildRequest implements DocumentSerializable {
     private UUID id;          // unique id for request
     private PlayerId sender;  // who sent (inviter or applicant)
-    private  PlayerId target;  // who is invited or applying
+    private PlayerId target;  // who is invited or applying
     private Instant createdAt;
+    private Type type;
 
     @Override
     public Document toDocument() {
-        return new Document("uuid",id.toString()).append("sender",sender.toDocument()).append("target",target.toDocument()).append("createdAt",createdAt.toEpochMilli());
+        return new Document("id", id.toString())
+                .append("sender", sender.toDocument())
+                .append("target", target.toDocument())
+                .append("createdAt", createdAt.toEpochMilli())
+                .append("type", type.name());
     }
 
     public static GuildRequest fromDocument(Document doc) {
@@ -30,8 +35,6 @@ public final class GuildRequest implements DocumentSerializable {
         return new GuildRequest(id, sender, target, createdAt, type);
     }
     public enum Type { INVITE, APPLY }
-
-    private Type type;
 
     public GuildRequest(PlayerId sender, PlayerId target, Type type) {
         this.id = UUID.randomUUID();
