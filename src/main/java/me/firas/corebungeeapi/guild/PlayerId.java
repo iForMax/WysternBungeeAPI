@@ -19,7 +19,11 @@ public final class PlayerId implements DocumentSerializable {
     @Override public boolean equals(Object o){ return o instanceof PlayerId && ((PlayerId)o).value.equals(value);}    
     @Override public int hashCode(){ return value.hashCode(); }
     @Override public String toString(){ return value.toString(); }
-
+    public static PlayerId fromDocument(Document doc) {
+        UUID uuid = UUID.fromString(doc.getString("uuid"));
+        String name = doc.getString("name");
+        return new PlayerId(uuid, name);
+    }
     @Override
     public Document toDocument() {
         return new Document("uuid", value.toString()).append("name",name);

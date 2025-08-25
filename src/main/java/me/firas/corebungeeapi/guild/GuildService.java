@@ -22,4 +22,8 @@ public interface GuildService {
     Collection<Guild> listGuilds();
     void startWeeklyQuest(GuildId guildId, GuildQuest quest);
     void endWeeklyQuest(GuildId guildId);
+    void sendRequest(GuildId guildId, PlayerId sender, PlayerId target, GuildRequest.Type type);
+    void removeRequest(GuildId guildId, UUID requestId);
+    void acceptRequest(GuildId guildId, UUID requestId, PlayerId acceptedBy);
+    void denyRequest(GuildId guildId, UUID requestId, PlayerId deniedBy);
 }

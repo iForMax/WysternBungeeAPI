@@ -14,5 +14,6 @@ public interface Guild extends DocumentSerializable {
     Collection<GuildMember> members();
     List<GuildRank> ranks();
     GuildStats stats();
+    Collection<GuildRequest> requests();
 
 }
