@@ -12,6 +12,10 @@ public interface Guild extends DocumentSerializable {
     int level();
     PlayerId ownerId();
     Collection<GuildMember> members();
+    default int maximumPlayers(){
+        return 150;
+    }
+    GuildSocial socials();
     List<GuildRank> ranks();
     GuildStats stats();
     Collection<GuildRequest> requests();

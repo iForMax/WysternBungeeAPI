@@ -6,11 +6,10 @@ public final class GuildTag implements DocumentSerializable{
     private final String value;
     private final String color;
 
-    private static final String PATTERN = "^[A-Za-z0-9]{3}$";
 
     public GuildTag(String value, String color) {
-        if (value == null || !value.matches(PATTERN)) {
-            throw new IllegalArgumentException("Guild tag must be exactly 3 alphanumeric characters");
+        if (value == null ) {
+            throw new IllegalArgumentException("Guild tag value is null!");
         }
         this.value = value.toUpperCase();
         this.color = translate(color == null ? "&f" : color);

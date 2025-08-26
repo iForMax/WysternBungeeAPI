@@ -6,4 +6,5 @@ public interface GuildMember {
     PlayerId playerId();
     GuildRank rank();
     Instant joinedAt();
+    GuildMemberSettings settings();
 }
