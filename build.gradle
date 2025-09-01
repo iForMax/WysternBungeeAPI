@@ -26,7 +26,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
-def targetJavaVersion = 8
+def targetJavaVersion = 16
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -53,8 +53,7 @@ processResources {
     }
 }
 
-// إعداد shadowJar
 tasks.named('shadowJar') {
-    destinationDirectory.set(file('D:/iForMax/Plugins/Wystern/SERVER/plugins'))
+    //destinationDirectory.set(file('D:/iForMax/Plugins/Wystern/SERVER/plugins'))
     archiveClassifier.set('')
 }
