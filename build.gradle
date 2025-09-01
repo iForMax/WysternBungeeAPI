@@ -55,6 +55,6 @@ processResources {
 
 // إعداد shadowJar
 tasks.named('shadowJar') {
-    //destinationDirectory.set(file('D:/iForMax/Plugins/Wystern/SERVER/plugins'))
+    destinationDirectory.set(file('D:/iForMax/Plugins/Wystern/SERVER/plugins'))
     archiveClassifier.set('')
 }
