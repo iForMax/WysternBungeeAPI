@@ -9,6 +9,7 @@ import org.bson.Document;
 public class GuildMemberSettings implements DocumentSerializable {
     private boolean chatEnabled = true;
     private boolean officerChatEnabled = true;
+    int completedQuests = 0;
     public GuildMemberSettings() {}
 
     @Override
@@ -16,6 +17,7 @@ public class GuildMemberSettings implements DocumentSerializable {
         Document doc = new Document();
         doc.append("chatEnabled", chatEnabled);
         doc.append("officerChatEnabled", officerChatEnabled);
+        doc.append("completedQuests", completedQuests);
         return doc;
     }
 
@@ -23,6 +25,7 @@ public class GuildMemberSettings implements DocumentSerializable {
         GuildMemberSettings settings = new GuildMemberSettings();
         settings.setChatEnabled(doc.getBoolean("chatEnabled", true));
         settings.setOfficerChatEnabled(doc.getBoolean("officerChatEnabled", true));
+        settings.setCompletedQuests(doc.getInteger("completedQuests",0));
         return settings;
     }
 }

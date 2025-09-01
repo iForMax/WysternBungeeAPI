@@ -14,6 +14,8 @@ public enum GuildPermission {
     REVOKE_REQUEST,
     LOCK_CHAT,
     BYPASS_LOCK_CHAT,
+    EDIT_ALLY,
+    EDIT_ENEMY,
     MUTE_PLAYER,
     UNMUTE_PLAYER,
     EDIT_NAME,

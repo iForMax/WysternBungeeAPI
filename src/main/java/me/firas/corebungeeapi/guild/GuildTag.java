@@ -11,7 +11,7 @@ public final class GuildTag implements DocumentSerializable{
         if (value == null ) {
             throw new IllegalArgumentException("Guild tag value is null!");
         }
-        this.value = value.toUpperCase();
+        this.value = value;
         this.color = translate(color == null ? "&f" : color);
     }
     private String translate(String message){

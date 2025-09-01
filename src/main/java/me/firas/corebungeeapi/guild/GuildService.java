@@ -20,8 +20,6 @@ public interface GuildService {
     void setStat(GuildId guildId, String key, Object value);
     Optional<Object> getStat(GuildId guildId, String key);
     Collection<Guild> listGuilds();
-    void startWeeklyQuest(GuildId guildId, GuildQuest quest);
-    void endWeeklyQuest(GuildId guildId);
     void sendRequest(GuildId guildId, PlayerId sender, PlayerId target, GuildRequest.Type type);
     void removeRequest(GuildId guildId, UUID requestId);
     void acceptRequest(GuildId guildId, UUID requestId, PlayerId acceptedBy);
