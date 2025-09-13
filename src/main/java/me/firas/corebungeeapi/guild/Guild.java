@@ -1,7 +1,9 @@
 package me.firas.corebungeeapi.guild;
 
+
+import me.firas.corebungeeapi.guild.quest.GuildQuest;
 import me.firas.corebungeeapi.guild.quest.GuildQuestData;
-import me.firas.corebungeeapi.guild.quest.QuestId;
+import me.firas.corebungeeapi.guild.quest.PlayerQuestAssignment;
 
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -10,6 +12,7 @@ import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface Guild extends DocumentSerializable {
@@ -35,47 +38,23 @@ public interface Guild extends DocumentSerializable {
     List<GuildId> enemies();
     GuildStats stats();
     Collection<GuildRequest> requests();
-    GuildQuestData questData();
-    default List<QuestId> weeklyQuests() {
-        return questData().weeklyQuests();
+    // NEW: Quest-related methods
+    GuildQuestData getQuestData();
+
+    // Helper methods for quests
+    default List<GuildQuest> getCurrentQuests() {
+        return getQuestData().getCurrentQuests();
     }
 
-    default QuestId guildGoalQuestId() {
-        return questData().guildGoalQuestId();
+    default Optional<PlayerQuestAssignment> getPlayerQuest(PlayerId playerId) {
+        return getQuestData().getPlayerAssignment(playerId);
     }
 
-    default Instant weeklyQuestRefreshDate() {
-        return questData().refreshDate();
-    }
-
-    default Set<PlayerId> guildGoalCompletedMembers() {
-        return questData().guildGoalCompletedMembers();
-    }
-
-    default boolean isGuildGoalCompleted() {
-        return questData().isGuildGoalCompleted();
-    }
-
-    // Helper methods for quest management
-    default int guildGoalProgress() {
-        return guildGoalCompletedMembers().size();
+    default boolean hasQuests() {
+        return getQuestData().hasActiveQuests();
     }
 
     default boolean needsQuestRefresh() {
-        Instant lastSunday8PM = getLastTime();
-        return weeklyQuestRefreshDate().isBefore(lastSunday8PM);
+        return getQuestData().isRefreshDue();
     }
-
-    private static Instant getLastTime() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime sunday8PM = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
-                .withHour(20).withMinute(0).withSecond(0).withNano(0);
-
-        if (now.isBefore(sunday8PM)) {
-            sunday8PM = sunday8PM.minusWeeks(1);
-        }
-
-        return sunday8PM.atZone(ZoneId.systemDefault()).toInstant();
-    }
-
 }
