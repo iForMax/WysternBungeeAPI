@@ -6,13 +6,11 @@ import me.firas.corebungeeapi.guild.PlayerId;
 import java.time.Instant;
 import java.util.Map;
 
-// Player Quest Assignment - Links player to one of the guild's 3 quests
-public interface PlayerQuestAssignment extends DocumentSerializable {
+public interface GuildQuestProgress extends DocumentSerializable {
+    GuildQuest quest();
     PlayerId playerId();
-    GuildQuestId assignedQuestId();
-    Instant assignedAt();
-    Instant completedAt();
-    QuestStatus status();
     Map<String, Object> progress();
     boolean isCompleted();
+    Instant assignedAt();
+    Instant completedAt();
 }

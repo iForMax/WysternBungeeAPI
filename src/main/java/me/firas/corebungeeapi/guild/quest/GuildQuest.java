@@ -1,14 +1,20 @@
 package me.firas.corebungeeapi.guild.quest;
 
 import me.firas.corebungeeapi.guild.DocumentSerializable;
+import me.firas.corebungeeapi.guild.GuildId;
+import me.firas.corebungeeapi.guild.PlayerId;
 
 import java.time.Instant;
+import java.util.Map;
 
-// Individual Guild Quest - One of the 3 assigned to guild
+// Quest-related interfaces and classes
 public interface GuildQuest extends DocumentSerializable {
-    GuildQuestId id();
-    String questTypeId();
-    Instant assignedAt();
+    String id();
+    String name();
+    String description();
+    QuestDifficulty difficulty();
+    Map<String, Object> requirements();
+    Map<String, Object> rewards();
     Instant expiresAt();
-    QuestStatus status();
+    boolean isCompleted(PlayerId playerId, GuildId guildId);
 }
